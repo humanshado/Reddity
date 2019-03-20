@@ -1,0 +1,194 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  font-size: 13px;
+  line-height: 27px;
+  word-spacing: 0.5px;
+  background-color: #FFF;
+  
+}
+
+.nav-wrapper{
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 99;
+  box-shadow: 0 3px 6px 3px rgba(0,0,0,0.16);
+  height: 5rem;
+  border-color: 5px solid #000;
+}
+
+#main-heading{
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  padding: 0.5em;
+  color: rgb(145, 7, 7);
+  font-weight: bold;
+  background-color: #FFF;
+  margin: 0 auto;
+}
+
+.banner{
+  position: sticky !important;
+  top: 70px !important;
+  z-index: 12;
+}
+
+.summary-links span{
+ margin: 10px;
+}
+
+.sort-group{
+  padding-left: 5px;
+}
+
+.sort-group select{
+  width: 10rem;
+}
+
+.sort-group select:hover{
+  border: 1px solid blue;
+}
+
+.main-blog h3{
+  color: #061826;
+}
+
+.post-details,
+.post-new{
+  background-color: #FFF;
+  border-radius: 5px;
+  height: 100vh;
+  padding: 15px;
+}
+
+.posts-wrapper span,
+.post-details span,
+.comments-wrapper span{
+  margin: 5px;
+}
+
+.categories-bar{
+  border-radius: 5px;
+  height: 50vh;
+  position: sticky !important;
+  top: 140px !important;
+}
+
+.categories-bar ul{
+  margin: 0;
+  padding: 0;
+}
+
+.categories-bar li{
+  list-style: none;
+  cursor: pointer;
+}
+
+.categories-bar li:hover{
+  color: blue;
+}
+
+
+.categories-bar h5{
+  color: blue;
+  padding-bottom: 8px;
+}
+
+.list-group-item{
+  margin-bottom: 5px;
+  height: 12rem;
+}
+
+.btn-group{
+  display: inline-block;
+}
+
+.list-group-item .btn{
+  margin: 5px; 
+}
+
+.panel:hover{
+  background-color: #EEE;
+  border: 2px solid white;
+}
+
+.panel li{
+  list-style: none;
+}
+
+.edit:hover {
+  color: blue;
+  cursor: pointer;
+}
+
+.delete:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.upVote,
+.downVote{
+  margin: 5px;
+  cursor: pointer;
+}
+
+.upVote:hover{
+  color:#BAF2BB;
+  size: 100;
+}
+
+.downVote:hover{
+  color:#DF5C7E;
+}
+
+.post-details p{
+  font-size: 1.8rem;
+  line-height: 30px;
+  opacity: 0.8;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.form-group,
+form button{
+  margin: 5px;
+}
+
+#comment-box{
+  width: 40rem;
+}
+
+.comments-wrapper h5{
+  margin: 0;
+  padding: 0;
+}
+
+.summary-card{
+  display: inline-block;
+  width: 22rem;
+  height: 27rem;
+  border: 1px solid #EEE;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  transition: box-shadow 1s;
+}
+
+.summary-card:hover{
+  box-shadow: -2px 6px 35px 0px rgba(0,0,0,1);
+}
+
+.card-caption{
+  text-align: center;
+  align-content: center;
+}
+
+.not-found h1,
+.not-found p{
+  text-align: center;
+}
+
+.not-found p{
+  font-size: 10rem;
+}
