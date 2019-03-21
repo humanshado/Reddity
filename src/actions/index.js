@@ -47,7 +47,7 @@ export function fetchPosts() {
 export function fetchPost_request(id) {
         return {
             type: FETCH_POST_REQUEST,
-            id
+            payload: id
         }
 }
 
@@ -66,21 +66,6 @@ export function fetchPost_failure(id, error) {
         error
     }
 }
-
-// export function fetchPostDetails(id) {
-//     return (dispatch) => {
-//         dispatch(fetchPost_request(id))
-
-//     return fetch(`${root_api}/posts/${id}`, { headers })
-//             .then(response => response.json())
-//             .then(json => dispatch(fetchPost_success(id, json)))
-
-//     error => { dispatch(fetchPost_failure(id, error))
-//                 throw error
-//             }
-//     }
-
-// }
 
 export function addPost(newPost){
     return {

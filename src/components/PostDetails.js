@@ -14,7 +14,7 @@ class PostDetails extends Component {
 
     componentWillMount = () => {
         const { id } = this.props.match.params;
-        this.props.fetch_post(id)
+        this.props.fetchPost_request(id);
         this.props.fetchComments(id);
     }
 
@@ -40,56 +40,52 @@ class PostDetails extends Component {
 
 
     render() {
-
-        let { id, title, author, body, category, timestamp, commentCount, voteScore } = this.props.post.json;
-        let { isFetching } = this.props.post;
-        commentCount = this.props.comments.length;
+        console.log('props in render post', this.props);
+        let { id } = this.props.match.params;
+        let post = this.props.posts.filter(p => p.id === id)[0];
+        console.log('post in render post', post);
+        let { title, author, body, category, timestamp, voteScore } = post;
+        //let { isFetching } = this.props.post;
+        const commentCount = this.props.comments.length;
         return (
             <div>
-                {isFetching && <h2>Loading...</h2>}
 
-                {!isFetching && _.isEmpty(this.props.post.json) &&
-                    <div>
-                       <PageNotFound />
-                    </div>
-                }
-                {!isFetching && id && this.props.post.json &&
-                    <div className="post-details">
-                        <div className="row">
-                            <div className="col-xs-12 pull-left">
-                                <span style={{ "color": "blue" }}><i className="fa fa-book" aria-hidden="true"></i> {category}</span>
-                                <h4><strong>{title}</strong></h4>
-                                posted by:<span style={{ "color": "red" }}><i className="fa fa-user-circle" aria-hidden="true"></i> <strong>{author}</strong></span> |
-                                    <span className="text-muted">{moment(timestamp).fromNow()}</span> |
-                                        comments: <span className="badge badge-primary">{commentCount}</span>
-                                | votes: <span className="upVote" onClick={() => this.handleUpVotePost(id)}><i className="fa fa-heart" aria-hidden="true"></i></span>
-                                <span className="downVote" onClick={() => this.handleDownVotePost(id)}><i className="fa fa-thumbs-down" aria-hidden="true"></i></span>
-                                <span>{voteScore}</span>
-                                <div className="pull-right btn-group">
-                                    <span className="edit" onClick={() => this.changeRoute(this.props.post)}><i className="fa fa-pencil" aria-hidden="true"></i></span>
-                                    <span className="delete" onClick={() => this.handleDeletePost(id)}><i className="fa fa-trash" aria-hidden="true"></i></span>
-                                </div>
-                                <hr /><p>{body}</p>
+                {_.isEmpty(this.props.posts) && <div><PageNotFound /></div>}
+
+                <div className="post-details">
+                    <div className="row">
+                        <div className="col-xs-12 pull-left">
+                            <span style={{ "color": "blue" }}><i className="fa fa-book" aria-hidden="true"></i> {category}</span>
+                            <h4><strong>{title}</strong></h4>
+                            posted by:<span style={{ "color": "red" }}><i className="fa fa-user-circle" aria-hidden="true"></i> <strong>{author}</strong></span> |
+                                <span className="text-muted">{moment(timestamp).fromNow()}</span> |
+                                    comments: <span className="badge badge-primary">{commentCount}</span>
+                            | votes: <span className="upVote" onClick={() => this.handleUpVotePost(id)}><i className="fa fa-heart" aria-hidden="true"></i></span>
+                            <span className="downVote" onClick={() => this.handleDownVotePost(id)}><i className="fa fa-thumbs-down" aria-hidden="true"></i></span>
+                            <span>{voteScore}</span>
+                            <div className="pull-right btn-group">
+                                <span className="edit" onClick={() => this.changeRoute(post)}><i className="fa fa-pencil" aria-hidden="true"></i></span>
+                                <span className="delete" onClick={() => this.handleDeletePost(id)}><i className="fa fa-trash" aria-hidden="true"></i></span>
                             </div>
-                        </div>
-                        }
-                            <hr />
-                        <div className="row">
-                            <div className="col-xs-12">
-                                <Comments comments={this.props.comments} {...this.props} />
-                            </div>
+                            <hr /><p>{body}</p>
                         </div>
                     </div>
+                    <hr />
+                    <div className="row">
+                        <div className="col-xs-12">
+                            <Comments comments={this.props.comments} post={post} {...this.props} />
+                        </div>
+                    </div>
+                </div>
                 }
             </div>
         )
     }
 }
 
-
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
     return {
-        post: state.post,
+        posts: state.posts,
         comments: Object.values(state.comments)
     }
 }

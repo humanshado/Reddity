@@ -1,13 +1,23 @@
 import { FETCH_COMMENTS, ADD_COMMENT, EDIT_COMMENT, UPVOTE_COMMENT, DOWNVOTE_COMMENT, DELETE_COMMENT } from '../actions/constants';
 
-export default function (state = {}, action) {
+let initialState = [
+    {
+        id: 'gsd898',
+        author: 'Jibril Tanko',
+        body: 'Nice post',
+        parentId: 'gsdhfgw3442',
+        timestamp: 1553093082532,
+        voteScore: 0,
+        deleted: false,
+        parentDeleted: false
+    }
+];
+
+export default function (state = initialState, action) {
     console.log('data received in comments reducer ', action.payload)
     switch (action.type) {
         case FETCH_COMMENTS:
-            return action.payload.reduce((acc, cur) => {
-                acc[cur.id] = cur;
-                return acc;
-            }, {});
+            return Object.values(state).filter(c => c.parentId === action.payload);
         case ADD_COMMENT:
             return {
                 ...state,

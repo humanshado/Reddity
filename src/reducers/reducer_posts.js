@@ -11,7 +11,7 @@ let initialState = [
         timestamp: 1553093082492,
         voteScore: 5,
         deleted: false,
-        commentCount: 0
+        commentCount: 1
     },
     {
         id: 'bjshds1937',
