@@ -85,7 +85,7 @@ class PostDetails extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        posts: state.posts,
+        posts: Object.values(state.posts),
         comments: Object.values(state.comments)
     }
 }

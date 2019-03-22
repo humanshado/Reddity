@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import produce from 'immer';
 import { FETCH_POSTS, ADD_POST, EDIT_POST, UPVOTE_POST, DOWNVOTE_POST, DELETE_POST } from '../actions/constants';
 
 let initialState = [
@@ -49,19 +50,13 @@ export default function (state = initialState, action) {
                 [action.payload.id] :action.payload
             }
         case UPVOTE_POST:
-            return {
-                ...state,
-                    [action.id] : {
-                        ...action.payload, voteScore : action.payload.voteScore+1
-                    }
-            }
+            return produce(_.mapKeys(state, 'id'), draft => {
+                draft[action.payload].voteScore += 1;
+            });
         case DOWNVOTE_POST:
-            return {
-                ...state,
-                    [action.id] : {
-                        ...action.payload, voteScore : action.payload.voteScore-1
-                    }
-            }
+            return produce(_.mapKeys(state, 'id'), draft => {
+                draft[action.payload].voteScore -= 1
+            });
         case DELETE_POST:
             const allPosts = Object.values(state);
             let newState = allPosts.filter(p => p.id !== action.payload)
