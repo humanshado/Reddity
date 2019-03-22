@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { editPost } from '../actions';
@@ -14,10 +13,10 @@ class EditPost extends Component {
             post: this.props.location.state.post
         }
 
-        this.submitPost = this.submitPost.bind(this);
+        //this.submitPost = this.submitPost.bind(this);
     }
 
-    componentWillReceiveProps = (nextProps) => {
+    UNSAFE_componentWillReceiveProps = (nextProps) => {
         console.log('nextProps in EditPost ', nextProps);
         if (this.props.location.state.post.id === nextProps.match.params.id){
             if (this.props.location.state.post.author !== nextProps.location.state.post.author){
@@ -52,7 +51,7 @@ class EditPost extends Component {
                 timestamp: post.timestamp,
                 voteScore: post.voteScore,
                 deleted: false,
-                commentCount: post.voteScore
+                commentCount: post.commentCount
         })
         this.props.history.push("/");
     }
@@ -103,10 +102,6 @@ class EditPost extends Component {
 }
 
 
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ editPost }, dispatch);
-}
-
 EditPost = reduxForm({
     form: "editPostForm",
     fields: ['author', 'title', 'category', 'body']
@@ -121,8 +116,8 @@ EditPost = connect(
             category: ownProps.location.state.post.category,
             body: ownProps.location.state.post.body
         }
-    }), 
-    mapDispatchToProps
+    }),
+    { editPost }
 )(EditPost);
 
 export default EditPost;

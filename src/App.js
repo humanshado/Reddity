@@ -16,17 +16,19 @@ class App extends Component {
     console.log('props in App.js render ', this.props)
     return (
       <div className="App">
-          <div className="row nav-wrapper"><Nav /></div>
+          <div className="row nav-wrapper">
+            <Nav />
+          </div>
         <div className="container">
           <div className="row">
               <div className="col-md-12">
                 <div className="row banner">
                   <Link to="/posts/new" className="btn btn-primary">Add Post</Link>
-              </div>
-              <div className="col-md-1 categories-bar">
-                <Route component={ListCategories} />
-              </div>
-
+                </div>
+                <hr />
+                <div className="col-md-2 categories-bar">
+                  <Route component={ListCategories} />
+                </div>
               <div className="col-md-9">
                     <Switch>
                       <Route exact path="/" component={PostsList}/>

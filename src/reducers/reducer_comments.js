@@ -10,6 +10,16 @@ let initialState = [
         voteScore: 0,
         deleted: false,
         parentDeleted: false
+    },
+    {
+        id: 'kjsd378',
+        author: 'Saminu Shehu',
+        body: 'I do not share your views on this',
+        parentId: 'gsdhfgw3442',
+        timestamp: 1553093082893,
+        voteScore: 0,
+        deleted: false,
+        parentDeleted: false
     }
 ];
 
@@ -17,7 +27,7 @@ export default function (state = initialState, action) {
     console.log('data received in comments reducer ', action.payload)
     switch (action.type) {
         case FETCH_COMMENTS:
-            return Object.values(state).filter(c => c.parentId === action.payload);
+            return [...state];
         case ADD_COMMENT:
             return {
                 ...state,
@@ -34,7 +44,7 @@ export default function (state = initialState, action) {
             return { ...state, [action.payload.id]: action.payload }
         case DELETE_COMMENT:
             const allComments = Object.values(state);
-            const newState = allComments.filter(c => c.id !== action.payload.id)
+            const newState = allComments.filter(c => c.id !== action.payload)
             return newState.reduce((acc, cur) => {
                 acc[cur.id] = cur;
                 return acc;

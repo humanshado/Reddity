@@ -7,7 +7,7 @@ const initialState = {
 }
 
 export default function (state = initialState, action) {
-    console.log('action in posts ', action)
+    //console.log('action in post reducer ', action)
     switch (action.type) {
         case FETCH_POST_REQUEST:
             return {...state};
@@ -28,10 +28,10 @@ export default function (state = initialState, action) {
                 ...state,
                 [action.payload.id]: action.payload
             }
-        case UPVOTE_POST:
-            return Object.assign({}, state, action.payload)
-        case DOWNVOTE_POST:
-            return Object.assign({}, state, action.payload)
+        // case UPVOTE_POST:
+        //     return Object.assign({}, state, action.payload);
+        // case DOWNVOTE_POST:
+        //     return Object.assign({}, state, action.payload)
         case DELETE_POST:
             const allPosts = Object.values(state);
             const newState = allPosts.filter(p => p.id !== action.payload.id)

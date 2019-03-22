@@ -88,17 +88,19 @@ export function deletePost(id){
     }
 }
 
-export function upVotePost(id){
+export function upVotePost(id, post){
     return {
         type: UPVOTE_POST,
-        payload: id
+        payload: post,
+        id
     }
 }
 
-export function downVotePost(id) {
+export function downVotePost(id, post) {
     return {
         type: DOWNVOTE_POST,
-        payload: id
+        payload: post,
+        id
     }
 }
 

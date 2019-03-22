@@ -24,12 +24,12 @@ class PostsList extends Component {
         this.props.deletePost(id);
     }
 
-    handleUpVotePost = (id) => {
-        this.props.upVotePost(id);
+    handleUpVotePost = (id, post) => {
+        this.props.upVotePost(id, post);
     }
 
-    handleDownVotePost = (id) => {
-        this.props.downVotePost(id);
+    handleDownVotePost = (id, post) => {
+        this.props.downVotePost(id, post);
     }
 
     changeRoute = (post) => {
@@ -54,11 +54,11 @@ class PostsList extends Component {
                                     <Link to={`/${post.category}/${post.id}`}>
                                         <h4><strong>{post.title}</strong></h4>
                                     </Link>
-                                    posted by:<span style={{"color" : "red"}}><i className="fa fa-user-circle" aria-hidden="true"></i> <strong>{post.author}</strong></span> |  
+                                    posted by:<span style={{"color" : "red"}}><i className="fa fa-user-circle" aria-hidden="true"></i> <strong>{post.author}</strong></span> |
                                     <span className="text-muted">{ moment(post.timestamp).fromNow()}</span> |
                                     comments: <span className="badge badge-primary">{post.commentCount}</span>
-                                | votes: <span className="upVote" onClick={() => this.handleUpVotePost(post.id)}><i className="fa fa-heart" aria-hidden="true"></i></span>
-                                <span className="downVote" onClick={() => this.handleDownVotePost(post.id)}><i className="fa fa-thumbs-down" aria-hidden="true"></i></span>
+                            | votes: <span className="upVote" onClick={() => this.handleUpVotePost(post.id, post)}><i className="fa fa-heart" aria-hidden="true"></i></span>
+                            <span className="downVote" onClick={() => this.handleDownVotePost(post.id, post)}><i className="fa fa-thumbs-down" aria-hidden="true"></i></span>
                                     <span>{post.voteScore}</span>
                                 </div>
                                 <div className="pull-right btn-group">
@@ -68,16 +68,16 @@ class PostsList extends Component {
                             </li>
                         </div>
                     </div>
-                    
-            ) 
+
+            )
         });
     }
 
-    
+
     render(){
-       
+       console.log('props in postsList ', this.props);
         return (
-            <div>         
+            <div>
                 <div className="col-xs-12 col-md-10 main-blog">
                         <ul>
                             {this.renderPosts()}
@@ -98,13 +98,13 @@ class PostsList extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return {    
+    return {
             posts: Object.values(state.posts)
-        
+
     }
 }
 
 export default connect(
-    mapStateToProps, 
+    mapStateToProps,
     { fetchPosts, upVotePost, downVotePost, editPost, deletePost }
 )(PostsList);

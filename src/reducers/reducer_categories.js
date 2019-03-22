@@ -1,6 +1,6 @@
 import { FETCH_CATEGORIES, SET_CATEGORY_FILTER } from '../actions/constants';
 
-let initialState = ['Politics', 'Education', 'Sports', 'Lifestyle', 'Health'];
+let initialState = ['all', 'politics', 'education', 'sports', 'lifestyle', 'health'];
 
 export default function (state = initialState, action){
     switch(action.type){

@@ -13,8 +13,15 @@ class Comments extends Component {
 
         this.state = {
             isEditing: false,
+            comments: [],
             selectedComment: {}
         }
+    }
+
+    componentDidMount = () => {
+        const postId = this.props.match.params.id;
+        let newComments = this.props.comments.filter(c => c.parentId === postId);
+        this.setState({ comments: newComments });
     }
 
     handleDeleteComment = (id) => {
@@ -40,7 +47,7 @@ class Comments extends Component {
     }
 
     renderComments = () => {
-        return this.props.comments.map((comment, index) => {
+        return this.state.comments.map((comment, index) => {
             return (
                 <div key={index}>
                     <i className="fa fa-comment-o" aria-hidden="true"></i><h4>{comment.body}</h4>
@@ -69,7 +76,7 @@ class Comments extends Component {
                 {this.state.isEditing
                     ? <div style={{ "backgroundColor": "#F2F3F5", "padding": "20px", "borderRadius": "10px" }}>
                         <h5>Editing...</h5>
-                        <CommentsEdit 
+                        <CommentsEdit
                             selectedComment={this.state.selectedComment}
                             editComment={this.props.editComment}
                             toggleEdit={this.toggleEdit}
@@ -81,7 +88,7 @@ class Comments extends Component {
                     </div>
                     : <div style={{ "padding": "20px", "borderRadius": "10px" }}>
                         <h5>New...</h5>
-                        <CommentsNew 
+                        <CommentsNew
                             parentId={this.props.post.id}
                             addComment={this.props.addComment}
                         />

@@ -6,7 +6,7 @@ body {
   line-height: 27px;
   word-spacing: 0.5px;
   background-color: #FFF;
-  
+
 }
 
 .nav-wrapper{
@@ -16,6 +16,7 @@ body {
   box-shadow: 0 3px 6px 3px rgba(0,0,0,0.16);
   height: 5rem;
   border-color: 5px solid #000;
+  margin-bottom: 20px;
 }
 
 #main-heading{
@@ -30,8 +31,9 @@ body {
 
 .banner{
   position: sticky !important;
-  top: 70px !important;
+  top: 60px !important;
   z-index: 12;
+  margin-bottom: 30px;
 }
 
 .summary-links span{
@@ -72,7 +74,7 @@ body {
   border-radius: 5px;
   height: 50vh;
   position: sticky !important;
-  top: 140px !important;
+  top: 10px !important;
 }
 
 .categories-bar ul{
@@ -105,7 +107,7 @@ body {
 }
 
 .list-group-item .btn{
-  margin: 5px; 
+  margin: 5px;
 }
 
 .panel:hover{

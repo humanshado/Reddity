@@ -12,7 +12,7 @@ import PageNotFound from './PageNotFound';
 
 class PostDetails extends Component {
 
-    componentWillMount = () => {
+    componentDidMount = () => {
         const { id } = this.props.match.params;
         this.props.fetchPost_request(id);
         this.props.fetchComments(id);
@@ -46,6 +46,7 @@ class PostDetails extends Component {
         console.log('post in render post', post);
         let { title, author, body, category, timestamp, voteScore } = post;
         //let { isFetching } = this.props.post;
+        const comments = this.props.comments;
         const commentCount = this.props.comments.length;
         return (
             <div>
@@ -73,11 +74,10 @@ class PostDetails extends Component {
                     <hr />
                     <div className="row">
                         <div className="col-xs-12">
-                            <Comments comments={this.props.comments} post={post} {...this.props} />
+                            <Comments comments={comments} post={post} {...this.props} />
                         </div>
                     </div>
                 </div>
-                }
             </div>
         )
     }
