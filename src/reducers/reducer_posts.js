@@ -24,9 +24,20 @@ let initialState = [
         voteScore: 3,
         deleted: false,
         commentCount: 0
+    },
+    {
+        id: 'skdhf83744',
+        title: 'Third Post',
+        author: 'Chang Lee',
+        category: 'education',
+        body: 'No poverty after acquiring the right skills and knowledge',
+        timestamp: 1553283710335,
+        voteScore: 8,
+        deleted: false,
+        commentCount: 0
     }
-]
 
+]
 
 export default function (state = initialState, action) {
     console.log('action in posts reducer', action);

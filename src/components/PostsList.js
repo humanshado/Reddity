@@ -6,7 +6,6 @@ import { fetchPosts, upVotePost, downVotePost, editPost, deletePost } from '../a
 import * as moment from 'moment';
 import sortBy from 'sort-by';
 
-
 class PostsList extends Component {
     constructor(props){
         super(props);
@@ -39,7 +38,8 @@ class PostsList extends Component {
 
     updateSort = (e) => {
         if (this.props.posts) {
-            this.setState({ sortOption: this.props.posts.sort(sortBy(e.target.value))
+            this.setState({
+                sortOption: this.props.posts.sort(sortBy(e.target.value))
             })
         }
     }
@@ -80,6 +80,11 @@ class PostsList extends Component {
 
     render(){
        console.log('props in postsList ', this.props);
+
+       if(!this.props.posts){
+            <div><h3>No posts to display ...</h3></div>
+       }
+
         return (
             <div>
                 <div className="col-xs-12 col-md-10 main-blog">
@@ -90,7 +95,6 @@ class PostsList extends Component {
                 <span className="col-md-2 sort-group">
                     <h5 className="text-muted">Sort by:</h5>
                     <select value={this.state.sortOption} onChange={(e) => this.updateSort(e)}>
-                        <option value=""></option>
                         <option value="timestamp">Date</option>
                         <option value="voteScore">Popularity</option>
                     </select>

@@ -61,7 +61,8 @@ class CategoryPosts extends Component {
 
     updateSort = (e) => {
         if (this.props.posts) {
-            this.setState({ sortOption: this.props.posts.sort(sortBy(e.target.value))
+            this.setState({
+                sortOption: this.props.posts.sort(sortBy(e.target.value))
             })
         }
     }
@@ -71,6 +72,10 @@ class CategoryPosts extends Component {
             return (<div className="panel panel-default" key={post.id}>
                         <div className="panel-body">
                             <li className="posts-wrapper">
+                                <div className="voting-arrows pull-left hidden-xs hidden-sm">
+                                    <p><i class="fa fa-chevron-circle-up 3x" onClick={() => this.handleUpVotePost(post.id)}></i></p>
+                                    <p><i class="fa fa-chevron-circle-down 3x" onClick={() => this.handleDownVotePost(post.id)}></i></p>
+                                </div>
                                 <div className="pull-left">
                                     <span style={{"color": "blue"}}><i className="fa fa-book" aria-hidden="true"></i> {post.category}</span>
                                     <Link to={`/${post.category}/${post.id}`}>
@@ -136,7 +141,6 @@ class CategoryPosts extends Component {
                 <span className="col-md-2 sort-group">
                     <h5 className="text-muted">Sort by:</h5>
                     <select value={this.state.sortOption} onChange={(e) => this.updateSort(e)}>
-                        <option value=""></option>
                         <option value="timestamp">Date</option>
                         <option value="voteScore">Popularity</option>
                     </select>
@@ -147,7 +151,7 @@ class CategoryPosts extends Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
     return {
             posts: Object.values(state.posts),
             activeCategory: Object.values(state.categories).filter(c => c.isActive === true ).map(c1 => c1.name)

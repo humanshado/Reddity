@@ -5,7 +5,7 @@ const Nav = (props) => {
     return (
         <div>
             <Link to="/">
-                <h3 id="main-heading"><i className="fa fa-briefcase" aria-hidden="true"></i>||Reddity - <small>say your mind ...</small></h3>
+                <h3 id="main-heading"><i className="fa fa-briefcase" aria-hidden="true"></i>||Reddity</h3>
             </Link>
         </div>
     );
