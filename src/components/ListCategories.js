@@ -13,7 +13,7 @@ class ListCategories extends Component {
         const { history } = this.props;
         let allCategories = this.props.categories;
         category.isActive = category.isActive === false ? true : true;
-        allCategories = allCategories.map(c => {
+        allCategories = Object.values(allCategories).map(c => {
             if(c != category){
                 c.isActive = c.isAcive === true ? false : false;
             }
@@ -25,14 +25,14 @@ class ListCategories extends Component {
 
     renderCategories = (categories) => {
         console.log('categories in renderCategoris function', categories);
-        return categories.map((category, index) => {
+        return Object.values(categories).map((category, index) => {
             return (
                     <li key={index} onClick={() => this.makeActive(category)}>
                         {category.name === "all"
                         ?   <i className="fa fa-list" aria-hidden="true"></i>
                         :   <i className="fa fa-book" aria-hidden="true"></i>
                         }
-                            <span> {_.capitalize(category)}</span>
+                            <span> {_.capitalize(category.name)}</span>
                    </li>
             )
         })

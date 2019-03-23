@@ -24,9 +24,9 @@ class CategoryPosts extends Component {
     }
 
     toggleCategory = () => {
-        if((this.state.isCategoryActive && this.state.activeCategory === "all") || 
+        if((this.state.isCategoryActive && this.state.activeCategory === "all") ||
             (!this.state.isCategoryActive && this.state.activeCategory !== "all")){
-                this.setState({ 
+                this.setState({
                     isCategoryActive: !this.state.isCategoryActive
                 });
         }
@@ -76,7 +76,7 @@ class CategoryPosts extends Component {
                                     <Link to={`/${post.category}/${post.id}`}>
                                         <h4><strong>{post.title}</strong></h4>
                                     </Link>
-                                    posted by:<span style={{"color" : "red"}}><i className="fa fa-user-circle" aria-hidden="true"></i> <strong>{post.author}</strong></span> |  
+                                    posted by:<span style={{"color" : "red"}}><i className="fa fa-user-circle" aria-hidden="true"></i> <strong>{post.author}</strong></span> |
                                     <span className="text-muted">{ moment(post.timestamp).fromNow()}</span> |
                                     comments: <span className="badge badge-primary">{post.commentCount}</span>
                                 | votes: <span className="upVote" onClick={() => this.handleUpVotePost(post.id)}><i className="fa fa-heart" aria-hidden="true"></i></span>
@@ -90,8 +90,8 @@ class CategoryPosts extends Component {
                             </li>
                         </div>
                     </div>
-                    
-            ) 
+
+            )
         });
     }
 
@@ -100,13 +100,13 @@ class CategoryPosts extends Component {
         switch (activeCategory) {
             case 'all':
                 return posts
-            case 'react':
+            case 'politics':
                 return posts.filter(post => post.category === activeCategory)
-            case 'redux':
+            case 'education':
                 return posts.filter(post => post.category === activeCategory)
-            case 'udacity':
+            case 'sports':
                 return posts.filter(post => post.category === activeCategory)
-            case 'sport':
+            case 'lifestyle':
                 return posts.filter(post => post.category === activeCategory)
             case 'health':
                 return posts.filter(post => post.category === activeCategory)
@@ -115,13 +115,13 @@ class CategoryPosts extends Component {
         }
     }
 
-    
+
     render(){
         let posts = this.getVisiblePosts(this.props.posts, ...this.state.activeCategory);
 
         return (
             <div>
-                {this.state.isCategoryActive           
+                {this.state.isCategoryActive
                 ?   <div className="col-xs-12 col-md-10 main-blog">
                         <ul>
                             {this.renderPosts(posts)}
@@ -148,14 +148,14 @@ class CategoryPosts extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return {    
+    return {
             posts: Object.values(state.posts),
             activeCategory: Object.values(state.categories).filter(c => c.isActive === true ).map(c1 => c1.name)
-        
+
     }
 }
 
 export default connect(
-    mapStateToProps, 
+    mapStateToProps,
     { fetchPosts, upVotePost, downVotePost, editPost, deletePost }
 )(CategoryPosts);
