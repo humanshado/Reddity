@@ -49,12 +49,16 @@ class PostsList extends Component {
             return (<div className="panel panel-default" key={post.id}>
                         <div className="panel-body">
                             <li className="posts-wrapper">
+                                <div className="voting-arrows pull-left hidden-xs hidden-sm">
+                                    <p><i class="fa fa-chevron-circle-up 3x" onClick={() => this.handleUpVotePost(post.id)}></i></p>
+                                    <p><i class="fa fa-chevron-circle-down 3x" onClick={() => this.handleDownVotePost(post.id)}></i></p>
+                                </div>
                                 <div className="pull-left">
                                     <span style={{"color": "blue"}}><i className="fa fa-book" aria-hidden="true"></i> {post.category}</span>
                                     <Link to={`/${post.category}/${post.id}`}>
                                         <h4><strong>{post.title}</strong></h4>
                                     </Link>
-                                    posted by:<span style={{"color" : "red"}}><i className="fa fa-user-circle" aria-hidden="true"></i> <strong>{post.author}</strong></span> |
+                                    posted by:<span style={{"color" : "red"}}><i className="fa fa-user-circle" aria-hidden="true"></i> <strong>{post.author}</strong></span>
                                     <span className="text-muted">{ moment(post.timestamp).fromNow()}</span> |
                                     comments: <span className="badge badge-primary">{post.commentCount}</span>
                             | votes: <span className="upVote" onClick={() => this.handleUpVotePost(post.id)}><i className="fa fa-heart" aria-hidden="true"></i></span>

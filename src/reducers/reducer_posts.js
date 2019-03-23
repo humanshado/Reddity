@@ -20,7 +20,7 @@ let initialState = [
         author: 'John Doe',
         category: 'education',
         body: 'The greatest thing in life is being aware of what works.',
-        timestamp: 553093227953,
+        timestamp: 1553283710035,
         voteScore: 3,
         deleted: false,
         commentCount: 0

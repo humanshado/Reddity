@@ -112,7 +112,6 @@ body {
 
 .panel:hover{
   background-color: #EEE;
-  border: 2px solid white;
 }
 
 .panel li{
@@ -125,6 +124,25 @@ body {
 }
 
 .delete:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.voting-arrows{
+  width: 10%;
+}
+
+.voting-arrows p{
+  font-size: 40px;
+  padding: 5px;
+}
+
+.voting-arrows p:first-child:hover{
+  color: green;
+  cursor: pointer;
+}
+
+.voting-arrows p:last-child:hover{
   color: red;
   cursor: pointer;
 }

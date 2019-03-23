@@ -27,11 +27,11 @@ export default function (state = initialState, action) {
     console.log('data received in comments reducer ', action.payload)
     switch (action.type) {
         case FETCH_COMMENTS:
-            return [...state];
+            return {...state};
         case ADD_COMMENT:
             return {
                 ...state,
-                [action.payload.id]:action.payload
+                [action.payload.id] : action.payload
             }
         case EDIT_COMMENT:
             return {

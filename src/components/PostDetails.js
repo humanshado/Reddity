@@ -41,13 +41,15 @@ class PostDetails extends Component {
 
     render() {
         console.log('props in render post', this.props);
+        console.log('comments in render post', this.props.comments);
         let { id } = this.props.match.params;
         let post = this.props.posts.filter(p => p.id === id)[0];
         console.log('post in render post', post);
         let { title, author, body, category, timestamp, voteScore } = post;
         //let { isFetching } = this.props.post;
-        const comments = this.props.comments;
-        const commentCount = this.props.comments.length;
+        let p_comments = this.props.comments.filter(c => c.parentId === id);
+        console.log('p_comments', p_comments);
+        let commentCount = p_comments.length;
         return (
             <div>
 
@@ -74,7 +76,11 @@ class PostDetails extends Component {
                     <hr />
                     <div className="row">
                         <div className="col-xs-12">
-                            <Comments comments={comments} post={post} {...this.props} />
+                            <Comments
+                                p_comments={p_comments}
+                                post={post}
+                                {...this.props}
+                            />
                         </div>
                     </div>
                 </div>

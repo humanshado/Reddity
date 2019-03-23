@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import * as moment from 'moment';
 import { getFormValues, isDirty, isPristine } from 'redux-form';
 import { addComment, editComment, upVoteComment, downVoteComment, deleteComment } from '../actions';
@@ -13,15 +12,21 @@ class Comments extends Component {
 
         this.state = {
             isEditing: false,
-            comments: [],
+            p_comments: [],
             selectedComment: {}
         }
     }
 
     componentDidMount = () => {
-        const postId = this.props.match.params.id;
-        let newComments = this.props.comments.filter(c => c.parentId === postId);
-        this.setState({ comments: newComments });
+        let newComments = this.props.p_comments;
+        console.log('newComments in componentDidMount', newComments);
+        this.setState({ p_comments: newComments });
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        if (this.state.p_comments !== nextProps.p_comments) {
+            this.setState({ p_comments: nextProps.p_comments })
+        }
     }
 
     handleDeleteComment = (id) => {
@@ -47,7 +52,7 @@ class Comments extends Component {
     }
 
     renderComments = () => {
-        return this.state.comments.map((comment, index) => {
+        return this.state.p_comments.map((comment, index) => {
             return (
                 <div key={index}>
                     <i className="fa fa-comment-o" aria-hidden="true"></i><h4>{comment.body}</h4>
@@ -95,19 +100,16 @@ class Comments extends Component {
                     </div>
                 }
                 <hr />
-                {this.props.comments && this.renderComments()}
+                {this.state.p_comments && this.renderComments()}
             </div>
         )
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ addComment, editComment, upVoteComment, downVoteComment, deleteComment }, dispatch);
-}
 
 Comments = connect(
     null,
-    mapDispatchToProps
+    { addComment, editComment, upVoteComment, downVoteComment, deleteComment }
 )(Comments);
 
 export default Comments;

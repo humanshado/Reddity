@@ -22,14 +22,14 @@ class App extends Component {
         <div className="container">
           <div className="row">
               <div className="col-md-12">
-                <div className="row banner">
+                <div className="row pull-right banner">
                   <Link to="/posts/new" className="btn btn-primary">Add Post</Link>
                 </div>
                 <hr />
-                <div className="col-md-2 categories-bar">
+                <div className="col-md-2  hidden-xs hidden-sm categories-bar">
                   <Route component={ListCategories} />
                 </div>
-              <div className="col-md-9">
+              <div className="col-md-10">
                     <Switch>
                       <Route exact path="/" component={PostsList}/>
                       <Route exact path="/posts/new" component={PostNew} />
