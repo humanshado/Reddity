@@ -1,4 +1,4 @@
-import { FETCH_COMMENTS, ADD_COMMENT, EDIT_COMMENT, UPVOTE_COMMENT, DOWNVOTE_COMMENT, DELETE_COMMENT } from '../actions/constants';
+import { FETCH_COMMENTS, ADD_COMMENT, EDIT_COMMENT, UPVOTE_COMMENT, DOWNVOTE_COMMENT, DELETE_COMMENT, DELETE_CHILD_COMMENTS } from '../actions/constants';
 
 let initialState = [
     {
@@ -46,6 +46,13 @@ export default function (state = initialState, action) {
             const allComments = Object.values(state);
             const newState = allComments.filter(c => c.id !== action.payload)
             return newState.reduce((acc, cur) => {
+                acc[cur.id] = cur;
+                return acc;
+            }, {});
+        case DELETE_CHILD_COMMENTS:
+            let childComments = Object.values(state);
+            const c_State = childComments.filter(c => c.parentId !== action.payload)
+            return c_State.reduce((acc, cur) => {
                 acc[cur.id] = cur;
                 return acc;
             }, {});

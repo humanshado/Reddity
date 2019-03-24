@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchPosts, upVotePost, downVotePost, editPost, deletePost } from '../actions';
+import { fetchPosts, upVotePost, downVotePost, editPost, deletePost, deleteChildComments } from '../actions';
 import * as moment from 'moment';
 import sortBy from 'sort-by';
 
@@ -21,6 +21,7 @@ class PostsList extends Component {
 
     handleDeletePost = (id) => {
         this.props.deletePost(id);
+        this.props.deleteChildComments(id);
     }
 
     handleUpVotePost = (id) => {
@@ -50,8 +51,8 @@ class PostsList extends Component {
                         <div className="panel-body">
                             <li className="posts-wrapper">
                                 <div className="voting-arrows pull-left hidden-xs hidden-sm">
-                                    <p><i class="fa fa-chevron-circle-up 3x" onClick={() => this.handleUpVotePost(post.id)}></i></p>
-                                    <p><i class="fa fa-chevron-circle-down 3x" onClick={() => this.handleDownVotePost(post.id)}></i></p>
+                                    <p><i className="fa fa-chevron-circle-up 3x" onClick={() => this.handleUpVotePost(post.id)}></i></p>
+                                    <p><i className="fa fa-chevron-circle-down 3x" onClick={() => this.handleDownVotePost(post.id)}></i></p>
                                 </div>
                                 <div className="pull-left">
                                     <span style={{"color": "blue"}}><i className="fa fa-book" aria-hidden="true"></i> {post.category}</span>
@@ -114,5 +115,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
     mapStateToProps,
-    { fetchPosts, upVotePost, downVotePost, editPost, deletePost }
+    { fetchPosts, upVotePost, downVotePost, editPost, deletePost, deleteChildComments }
 )(PostsList);

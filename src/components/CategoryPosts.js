@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchPosts, upVotePost, downVotePost, editPost, deletePost } from '../actions';
+import { fetchPosts, upVotePost, downVotePost, editPost, deletePost, deleteChildComments } from '../actions';
 import * as moment from 'moment';
 import sortBy from 'sort-by';
 import ListCategories from './ListCategories';
@@ -44,6 +44,7 @@ class CategoryPosts extends Component {
 
     handleDeletePost = (id) => {
         this.props.deletePost(id);
+        this.props.deleteChildComments(id);
     }
 
     handleUpVotePost = (id) => {
@@ -161,5 +162,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    { fetchPosts, upVotePost, downVotePost, editPost, deletePost }
+    { fetchPosts, upVotePost, downVotePost, editPost, deletePost, deleteChildComments }
 )(CategoryPosts);

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { Field, reduxForm } from 'redux';
-import { fetchPost_request, fetchPost_success, fetchPost_failure, fetchComments, editPost, upVotePost, downVotePost, deletePost } from '../actions';
+import { fetchPost_request, fetchPost_success, fetchPost_failure, fetchComments, editPost, upVotePost, downVotePost, deletePost, deleteChildComments} from '../actions';
 import * as moment from 'moment';
 import Comments from './Comments';
 import EditPost from './EditPost';
@@ -18,9 +18,11 @@ class PostDetails extends Component {
         this.props.fetchComments(id);
     }
 
-    handleDeletePost = (id) => {
+    handleDeletePost = async (id) => {
         console.log('Post to delete from PostList.js ', id)
-        this.props.deletePost(id);
+        let d_comments = this.props.comments.filter(c => c.parentId === id);
+        await this.props.deletePost(id);
+        await this.props.deleteChildComments(id);
         this.props.history.push("/");
     }
 
@@ -43,7 +45,7 @@ class PostDetails extends Component {
         console.log('props in render post', this.props);
         console.log('comments in render post', this.props.comments);
         let { id } = this.props.match.params;
-        let post = this.props.posts.filter(p => p.id === id)[0];
+        let post = post && this.props.posts.filter(p => p.id === id)[0];
         console.log('post in render post', post);
         let { title, author, body, category, timestamp, voteScore } = post;
         //let { isFetching } = this.props.post;
@@ -98,5 +100,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    { fetchPost_request, fetchPost_success, fetchPost_failure, fetchComments, editPost, upVotePost, downVotePost, deletePost }
+    { fetchPost_request, fetchPost_success, fetchPost_failure, fetchComments, editPost, upVotePost, downVotePost, deletePost, deleteChildComments }
 )(PostDetails);

@@ -11,6 +11,7 @@ export const ADD_POST = "ADD_POST";
 export const EDIT_POST = "EDIT_POST";
 export const EDIT_DETAIL_POST = "EDIT_POST";
 export const DELETE_POST = "DELETE_POST";
+export const DELETE_CHILD_COMMENTS = "DELETE_CHILD_COMMENTS";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 export const UPVOTE_COMMENT = "UPVOTE_COMMENT";
 export const DOWNVOTE_COMMENT = "DOWNVOTE_COMMENT";

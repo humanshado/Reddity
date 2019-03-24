@@ -12,6 +12,7 @@ import {
     ADD_POST,
     EDIT_POST,
     DELETE_POST,
+    DELETE_CHILD_COMMENTS,
     EDIT_COMMENT,
     UPVOTE_COMMENT,
     DOWNVOTE_COMMENT,
@@ -139,3 +140,9 @@ export function deleteComment(commentId){
     }
 }
 
+export function deleteChildComments(parentId){
+    return {
+        type: DELETE_CHILD_COMMENTS,
+        payload: parentId
+    }
+}
