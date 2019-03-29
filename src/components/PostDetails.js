@@ -42,11 +42,11 @@ class PostDetails extends Component {
 
 
     render() {
-        console.log('props in render post', this.props);
-        console.log('comments in render post', this.props.comments);
+        console.log('props in render post details', this.props);
+        console.log('comments in render post details', this.props.comments);
         let { id } = this.props.match.params;
-        let post = post && this.props.posts.filter(p => p.id === id)[0];
-        console.log('post in render post', post);
+        let post = this.props.posts && this.props.posts.filter(p => p.id === id)[0];
+        console.log('post in render post details', post);
         let { title, author, body, category, timestamp, voteScore } = post;
         //let { isFetching } = this.props.post;
         let p_comments = this.props.comments.filter(c => c.parentId === id);

@@ -1,3 +1,5 @@
+import _ from 'lodash';
+import produce from 'immer';
 import { FETCH_COMMENTS, ADD_COMMENT, EDIT_COMMENT, UPVOTE_COMMENT, DOWNVOTE_COMMENT, DELETE_COMMENT, DELETE_CHILD_COMMENTS } from '../actions/constants';
 
 let initialState = [
@@ -39,9 +41,13 @@ export default function (state = initialState, action) {
                 [action.payload.id]: action.payload
             }
         case UPVOTE_COMMENT:
-            return {  ...state, [action.payload.id]: action.payload }
+            return produce(_.mapKeys(state, 'id'), draft => {
+                draft[action.payload].voteScore += 1;
+            });
         case DOWNVOTE_COMMENT:
-            return { ...state, [action.payload.id]: action.payload }
+            return produce(_.mapKeys(state, 'id'), draft => {
+                draft[action.payload].voteScore -= 1
+            });
         case DELETE_COMMENT:
             const allComments = Object.values(state);
             const newState = allComments.filter(c => c.id !== action.payload)
